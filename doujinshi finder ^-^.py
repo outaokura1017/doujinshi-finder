@@ -5,6 +5,10 @@ def nyahentai(string:str):
     match = re.search(r'https://nyahentai\.re/fanzine/re([^/]+)', r.text)
     if match:
         r18path = match.group(1)
+        if '"' in r18path:
+            r18path = r18path[:r18path.find('"')]  # ダブルクオーテーション（"）の前の部分を抽出
+        else:    
+            r18path = r18path
         print('https://nyahentai.re/fanzine/re' + r18path)
         global a
         a += 1
@@ -16,6 +20,10 @@ def momonga(string:str):
     match = re.search(r'https://momon-ga\.com/fanzine/mo([^/]+)', r.text)
     if match:
         r18path = match.group(1)
+        if '"' in r18path:
+            r18path = r18path[:r18path.find('"')]  # ダブルクオーテーション（"）の前の部分を抽出
+        else:    
+            r18path = r18path
         print('https://momon-ga.com/fanzine/mo' + r18path)
         global a
         a += 1
@@ -27,6 +35,10 @@ def doujinantena(string:str):
     match = re.search(r'https://doujinantena\.top/comic/do([^/]+)', r.text)
     if match:
         r18path = match.group(1)
+        if '"' in r18path:
+            r18path = r18path[:r18path.find('"')]  # ダブルクオーテーション（"）の前の部分を抽出
+        else:    
+            r18path = r18path
         print('https://doujinantena/comic/do' + r18path)
         global a
         a += 1
@@ -38,6 +50,10 @@ def dddsmart(string:str):
     match = re.search(r'/doujinshi3/([^/]+)', r.text)
     if match:
         r18path = match.group(1).replace('" target="',"").replace('"><',"").replace("&page=0&from=search&from=package-list_self", "")
+        if '"' in r18path:
+            r18path = r18path[:r18path.find('"')]  # ダブルクオーテーション（"）の前の部分を抽出
+        else:    
+            r18path = r18path
         print('https://ddd-smart.net/doujinshi3/' + r18path)
         global a
         a += 1
@@ -51,6 +67,10 @@ def doujinnomori(string:str):
     if match:
         r18path = match.group(1).replace('" class="1ede1ee8-1041-4d3b-b4b8-833258fee1ff" target="_blank">', "").replace("<figure>", "").replace('<img class="comic__img 1ede1ee8-1041-4d3b-b4b8-833258fee1ff" src="https:', "").replace(" ","")
         r18path = '\n'.join(line for line in r18path.splitlines() if line.strip())
+        if '"' in r18path:
+            r18path = r18path[:r18path.find('"')]  # ダブルクオーテーション（"）の前の部分を抽出
+        else:    
+            r18path = r18path
         print('https://doujinnomori.com/comics/detail' + r18path)
         global a
         a += 1
@@ -68,6 +88,10 @@ def shinshimanga(string:str):
         global a
         r18path = match.group(1).replace('" class="post__link 652a67c2-f2b0-4cb8-b0d5-45d617147884" target="_blank"><', "").replace('" class="post__link a49f17c8-e95a-4483-90cf-b79dac9aee9a" target="_blank"><', "")
         r18path= '\n'.join(line for line in r18path.splitlines() if line.strip())
+        if '"' in r18path:
+            r18path = r18path[:r18path.find('"')]  # ダブルクオーテーション（"）の前の部分を抽出
+        else:    
+            r18path = r18path
         if r18path==noosusume:
             a += 0
             return
@@ -86,27 +110,22 @@ if a==1:
 else:
     doujinnomori(aaa)
     if a==1:
-        print("founded")
         input()
     else:
         dddsmart(aaa)
         if a==1:
-            print("founded")
             input()
         else:
             nyahentai(aaa)
             if a==1:
-                print("founded")
                 input()
             else:
                 momonga(aaa)
                 if a==1:
-                    print("founded")
                     input()
                 else:
                     doujinantena(aaa)
                     if a==1:
-                        print("founded")
                         input()
                     else:
                         print("not found")
